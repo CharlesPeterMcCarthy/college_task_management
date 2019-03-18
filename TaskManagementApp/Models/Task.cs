@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,18 +19,38 @@ namespace TaskManagementApp.Models {
         Management
     }
 
-    public class Task {
+    public class Task: INotifyPropertyChanged {
         public string Title { get; set; }
         public string Description { get; set; }
         public Category Category { get; set; }
         public Priority Priority { get; set; }
-        public DateTime DueDate { private get; set; }
-        public string Responsibility { get; set; }
-        public string[] Labels { private get; set; }
-        public bool IsComplete { get; set; }
+        public DateTime DueDate { get; set; }
+        private string _responsibility;
+        public string Responsibility {
+            get { return _responsibility; }
+            protected set {
+                _responsibility = value;
+                RaisePropertyChanged("Responsibility");
+            }
+        }
+        public string[] Labels { get; set; }
+        private bool _isComplete;
+        public bool IsComplete {
+            get { return _isComplete; }
+            protected set {
+                _isComplete = value;
+                RaisePropertyChanged("IsComplete");
+            }
+        }
 
         public string DueDateReadable { get { return DueDate.ToShortDateString(); } }
         public string LabelsString { get { return string.Join(", ", Labels); } }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void RaisePropertyChanged(string propertyName) {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public Task() {}
 

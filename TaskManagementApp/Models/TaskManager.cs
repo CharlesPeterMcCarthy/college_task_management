@@ -19,6 +19,9 @@ namespace TaskManagementApp.Models {
             FakeDatabase.SaveTask(Tasks.ToList());
         }
 
-        public void DeleteTask(Task t) => Tasks.Remove(t);
+        public void DeleteTask(Task t) {
+            Tasks.Remove(t);
+            FakeDatabase.SaveTask(Tasks.ToList());
+        }
     }
 }

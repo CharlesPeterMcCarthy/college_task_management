@@ -32,5 +32,14 @@ namespace TaskManagementApp.Pages {
 
         private void LbxTasks_SelectionChanged(object sender, SelectionChangedEventArgs e) => NavigationService.Navigate(new ViewTaskPage(((ListBox)sender).SelectedItem as Models.Task));
         
+        private void CompleteTask(object sender, RoutedEventArgs e) {
+            Models.Task t = ((ListBoxItem)lbxTasks.ContainerFromElement((Button)sender)).Content as Models.Task;
+            t.CompleteTask();
+        }
+
+        private void DeleteTask(object sender, RoutedEventArgs e) {
+            Models.Task t = ((ListBoxItem)lbxTasks.ContainerFromElement((Button)sender)).Content as Models.Task;
+            TaskManager.DeleteTask(t);
+        }
     }
 }

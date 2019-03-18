@@ -31,8 +31,6 @@ namespace TaskManagementApp {
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             TaskManager = new TaskManager(FakeDatabase.GetTasks());
 
-            Console.WriteLine(TaskManager.Tasks[0].Title);
-
             SetHeadingText("Tasks");
 
             NavigateHome();

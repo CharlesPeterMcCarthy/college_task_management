@@ -12,12 +12,12 @@ namespace TaskManagementApp.Services {
         private const string FILE = "database/tasks.json";
 
         public static List<Task> GetTasks() {
-            List<Task> tasks;
+            List<Task> tasks = new List<Task>();
 
             using (StreamReader sr = new StreamReader(FILE)) {
                 string json = sr.ReadToEnd();
 
-                tasks = JsonConvert.DeserializeObject<List<Task>>(json);
+                if (json.Length > 0) tasks = JsonConvert.DeserializeObject<List<Task>>(json);
             }
 
             return tasks;

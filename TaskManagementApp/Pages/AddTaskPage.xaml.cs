@@ -45,8 +45,11 @@ namespace TaskManagementApp.Pages {
             Priority priority = GetPriority();
             DateTime dueDate = dtpkDueDate.SelectedDate.Value.Date;
 
-            Models.Task newTask = new Models.Task(title, desc, category, priority, dueDate, labels);
-            SaveNewTask(newTask);
+            SaveNewTask(
+                responsibility.Length > 0 ?
+                new Models.Task(title, desc, category, priority, dueDate, responsibility, labels) :
+                new Models.Task(title, desc, category, priority, dueDate, labels)
+            );
         }
 
         private Category GetCatgeory() => (Category)cbxCategory.SelectedIndex;
