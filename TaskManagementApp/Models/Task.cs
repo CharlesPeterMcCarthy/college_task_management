@@ -19,14 +19,14 @@ namespace TaskManagementApp.Models {
     }
 
     public class Task {
-        public string Title { get; private set; }
-        public string Description { get; private set; }
-        public Category Category { get; private set; }
-        public Priority Priority { get; private set; }
-        public DateTime DueDate { get; private set; }
-        public string Responsibility { get; private set; }
-        public string[] Labels { get; private set; }
-        public bool IsComplete { get; private set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Category Category { get; set; }
+        public Priority Priority { get; set; }
+        public DateTime DueDate { get; set; }
+        public string Responsibility { get; set; }
+        public string[] Labels { get; set; }
+        public bool IsComplete { get; set; }
 
         public Task() {}
 

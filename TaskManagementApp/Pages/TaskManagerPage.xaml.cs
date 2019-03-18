@@ -12,14 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskManagementApp.Models;
 
 namespace TaskManagementApp.Pages {
     /// <summary>
     /// Interaction logic for TaskManagerPage.xaml
     /// </summary>
     public partial class TaskManagerPage : Page {
-        public TaskManagerPage() {
-            InitializeComponent();
+
+        public TaskManager TaskManager { get; set; }
+
+        public TaskManagerPage() => InitializeComponent();
+
+        public TaskManagerPage(TaskManager tm) : this() {
+            TaskManager = tm;
+
+            lbxTasks.ItemsSource = TaskManager.Tasks;
         }
+
     }
 }

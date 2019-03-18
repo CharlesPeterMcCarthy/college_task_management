@@ -16,6 +16,7 @@ namespace TaskManagementApp.Services {
 
             using (StreamReader sr = new StreamReader(FILE)) {
                 string json = sr.ReadToEnd();
+
                 tasks = JsonConvert.DeserializeObject<List<Task>>(json);
             }
 

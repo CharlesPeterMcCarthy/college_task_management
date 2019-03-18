@@ -30,6 +30,9 @@ namespace TaskManagementApp {
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e) {
             TaskManager = new TaskManager(FakeDatabase.GetTasks());
+
+            Console.WriteLine(TaskManager.Tasks[0].Title);
+
             SetHeadingText("Tasks");
 
             NavigateHome();
@@ -41,7 +44,7 @@ namespace TaskManagementApp {
 
         private void TxtBlkAddTask_Click(object sender, RoutedEventArgs e) => NavigateAddTask();
 
-        private void NavigateHome() => mainFrame.NavigationService.Navigate(new TaskManagerPage());
+        private void NavigateHome() => mainFrame.NavigationService.Navigate(new TaskManagerPage(TaskManager));
 
         private void NavigateAddTask() => mainFrame.NavigationService.Navigate(new AddTaskPage());
 
