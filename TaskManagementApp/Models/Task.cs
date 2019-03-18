@@ -28,6 +28,8 @@ namespace TaskManagementApp.Models {
         public string[] Labels { get; private set; }
         public bool IsComplete { get; private set; }
 
+        public Task() {}
+
         public Task(string title, string description, Category category,
             Priority priority, DateTime dueDate, string responsibility, string[] labels): this(title, description, category, priority, dueDate, labels) {
             Responsibility = responsibility;
