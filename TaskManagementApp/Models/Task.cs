@@ -23,10 +23,13 @@ namespace TaskManagementApp.Models {
         public string Description { get; set; }
         public Category Category { get; set; }
         public Priority Priority { get; set; }
-        public DateTime DueDate { get; set; }
+        public DateTime DueDate { private get; set; }
         public string Responsibility { get; set; }
-        public string[] Labels { get; set; }
+        public string[] Labels { private get; set; }
         public bool IsComplete { get; set; }
+
+        public string DueDateReadable { get { return DueDate.ToShortDateString(); } }
+        public string LabelsString { get { return string.Join(", ", Labels); } }
 
         public Task() {}
 
@@ -48,5 +51,6 @@ namespace TaskManagementApp.Models {
         public void CompleteTask() => IsComplete = true;
 
         public void AssignResponsibility(string name) => Responsibility = name;
+
     }
 }

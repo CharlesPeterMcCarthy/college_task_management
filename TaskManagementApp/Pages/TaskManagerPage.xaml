@@ -8,9 +8,11 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskManagerPage">
     <Page.Resources>
-        <DataTemplate x:Key="TaskTemplate">
+        <DataTemplate x:Key="TaskTemplate" x:Name="TaskTemplate" DataType="{x:Type ListBoxItem}">
             <StackPanel Name="mainPanel">
-                <Grid>
+                <TextBlock Text="{Binding Path=Title, Mode=OneWay}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
+
+                <Grid Name="mainGrid">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
@@ -21,7 +23,6 @@
                         <ColumnDefinition Width="50*"/>
                     </Grid.ColumnDefinitions>
                     
-                    <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Title, Mode=OneWay}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
                     <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Path=Description, Mode=OneWay}" />
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Path=DueDate, Mode=OneWay}" />
                     <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
@@ -41,6 +42,10 @@
                 <DataTrigger Binding="{Binding Path=Priority}" Value="Low">
                     <Setter Property="Background" TargetName="mainPanel" Value="#BFFFC1" />
                 </DataTrigger>
+                <DataTrigger Binding="{Binding Path=IsComplete}" Value="true">
+                    <Setter Property="Background" TargetName="mainPanel" Value="DarkGray" />
+                    <Setter Property="Visibility" TargetName="mainGrid" Value="Collapsed" />
+                </DataTrigger>
             </DataTemplate.Triggers>
         </DataTemplate>
     </Page.Resources>
@@ -51,6 +56,16 @@
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
 
-        <ListBox Name="lbxTasks" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" />
+        <ListBox Name="lbxTasks" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" SelectionChanged="LbxTasks_SelectionChanged">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=IsComplete}" Value="true">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
     </Grid>
 </Page>

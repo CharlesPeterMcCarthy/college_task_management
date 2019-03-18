@@ -30,5 +30,7 @@ namespace TaskManagementApp.Pages {
             lbxTasks.ItemsSource = TaskManager.Tasks;
         }
 
+        private void LbxTasks_SelectionChanged(object sender, SelectionChangedEventArgs e) => NavigationService.Navigate(new ViewTaskPage(((ListBox)sender).SelectedItem as Models.Task));
+        
     }
 }
