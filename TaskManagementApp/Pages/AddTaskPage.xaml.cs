@@ -12,14 +12,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TaskManagementApp.Models;
+using TaskManagementApp.Services;
 
 namespace TaskManagementApp.Pages {
     /// <summary>
     /// Interaction logic for AddTaskPage.xaml
     /// </summary>
     public partial class AddTaskPage : Page {
+
+        public TaskManager TaskManager { get; set; }
+
         public AddTaskPage() {
             InitializeComponent();
+
+            SetComboBoxes();
         }
+
+        public AddTaskPage(TaskManager tm): this() =>  TaskManager = tm;
+
+        private void SetComboBoxes() {
+            cbxCategory.ItemsSource = Enum.GetNames(typeof(Category));
+            cbxPriority.ItemsSource = Enum.GetNames(typeof(Priority));
+        }
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e) {
+            string title = txtbxTitle.Text;
+            string desc = txtbxDescription.Text;
+            string responsibility = txtbxResponsbility.Text;
+            string[] labels = txtbxLabels.Text.Split(',').Select(l => l.Trim()).ToArray();
+            Category category = GetCatgeory();
+            Priority priority = GetPriority();
+            DateTime dueDate = dtpkDueDate.SelectedDate.Value.Date;
+
+            Models.Task newTask = new Models.Task(title, desc, category, priority, dueDate, labels);
+            SaveNewTask(newTask);
+        }
+
+        private Category GetCatgeory() => (Category)cbxCategory.SelectedIndex;
+
+        private Priority GetPriority() => (Priority)cbxPriority.SelectedIndex;
+
+        private void SaveNewTask(Models.Task t) => TaskManager.AddTask(t);
+
     }
 }

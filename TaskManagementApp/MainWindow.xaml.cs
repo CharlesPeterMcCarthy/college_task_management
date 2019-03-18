@@ -46,7 +46,7 @@ namespace TaskManagementApp {
 
         private void NavigateHome() => mainFrame.NavigationService.Navigate(new TaskManagerPage(TaskManager));
 
-        private void NavigateAddTask() => mainFrame.NavigationService.Navigate(new AddTaskPage());
+        private void NavigateAddTask() => mainFrame.NavigationService.Navigate(new AddTaskPage(TaskManager));
 
     }
 }

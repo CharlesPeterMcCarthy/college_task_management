@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TaskManagementApp.Services;
 
 namespace TaskManagementApp.Models {
     public class TaskManager {
@@ -13,7 +14,10 @@ namespace TaskManagementApp.Models {
             Tasks = new ObservableCollection<Task>(tasks);
         }
 
-        public void AddTask(Task t) => Tasks.Add(t);
+        public void AddTask(Task t) {
+            Tasks.Add(t);
+            FakeDatabase.SaveTask(Tasks.ToList());
+        }
 
         public void DeleteTask(Task t) => Tasks.Remove(t);
     }
