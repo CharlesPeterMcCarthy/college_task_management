@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="mainWindow" Loaded="MainWindow_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         
+        <StackPanel Background="Gray" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" Grid.RowSpan="2">
+            <Button Name="txtBlkTasks" Content="Tasks" Margin="10" Click="TxtBlkTasks_Click" />
+            <Button Name="txtBlkAddTask" Content="Add Task" Margin="10" Click="TxtBlkAddTask_Click" />
+        </StackPanel>
+
+        <StackPanel Background="Gray" Grid.Column="1" Grid.Row="0">
+            <TextBlock Name="txtBlkHeading" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Width="auto" />
+        </StackPanel>
+        <ScrollViewer Grid.Column="1" Grid.Row="1">
+            <Frame Name="mainFrame" NavigationUIVisibility="Hidden" Padding="10" />
+        </ScrollViewer>
     </Grid>
 </Window>
