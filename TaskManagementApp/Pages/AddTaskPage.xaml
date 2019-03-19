@@ -35,7 +35,7 @@
         <Label Grid.Row="1" Grid.Column="0" Content="Description" />
         <TextBox Grid.Row="1" Grid.Column="1" Name="txtbxDescription" />
         <Label Grid.Row="2" Grid.Column="0" Content="Category" />
-        <ComboBox Grid.Row="2" Grid.Column="1" Name="cbxCategory" Text="Choose Catgeory.." IsEditable="True" IsReadOnly="True" />
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="cbxCategory" Text="Choose Categeory.." IsEditable="True" IsReadOnly="True" />
         <Label Grid.Row="3" Grid.Column="0" Content="Priority" />
         <ComboBox Grid.Row="3" Grid.Column="1" Name="cbxPriority" Text="Choose Priority.." IsEditable="True" IsReadOnly="True" />
         <Label Grid.Row="4" Grid.Column="0" Content="Due Date" />

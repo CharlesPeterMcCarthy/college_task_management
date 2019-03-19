@@ -16,8 +16,8 @@ namespace TaskManagementApp {
 
         void App_Startup(object sender, StartupEventArgs e) {
             ss.Show(false);
-            Thread.Sleep(4000);
-            ss.Close(new TimeSpan(2000));
+            Thread.Sleep(2000);
+            ss.Close(new TimeSpan());
         }
     }
 }

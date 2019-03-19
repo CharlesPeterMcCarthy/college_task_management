@@ -62,6 +62,7 @@ namespace TaskManagementApp.Pages {
 
         private void SearchTasks(object sender, RoutedEventArgs e) {
             string searchString = tbxSearch.Text;
+            tbxSearch.Text = "";
             Tasks.Clear();
             foreach (Task t in TaskManager.Tasks) if (t.Title.Contains(searchString)) Tasks.Add(t);
         }
@@ -81,5 +82,8 @@ namespace TaskManagementApp.Pages {
                 new ObservableCollection<Task>(Tasks.ToList().OrderBy(t => t[field]))
             );
         }
+
+        private void CommitChanges(object sender, RoutedEventArgs e) => TaskManager.UpdateTasks();
+        
     }
 }

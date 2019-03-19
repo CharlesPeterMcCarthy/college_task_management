@@ -8,36 +8,80 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditTaskPage">
 
+    <Page.Resources>
+        <Style x:Key="taskValue" TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Page.Resources>
+
     <Grid Background="White" x:Name="editTaskGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="40*"/>
-            <ColumnDefinition Width="60*"/>
-        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" Content="Title" />
-        <TextBox Grid.Row="0" Grid.Column="1" Name="txtbxTitle" Text="{Binding Path=Title, Mode=TwoWay}" />
-        <Label Grid.Row="1" Grid.Column="0" Content="Description" />
-        <TextBox Grid.Row="1" Grid.Column="1" Name="txtbxDescription" Text="{Binding Path=Description, Mode=TwoWay}" />
-        <Label Grid.Row="2" Grid.Column="0" Content="Category" />
-        <ComboBox Grid.Row="2" Grid.Column="1" Name="cbxCategory" Text="Choose Catgeory.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Category, Mode=TwoWay}" />
-        <Label Grid.Row="3" Grid.Column="0" Content="Priority" />
-        <ComboBox Grid.Row="3" Grid.Column="1" Name="cbxPriority" Text="Choose Priority.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Priority, Mode=TwoWay}" />
-        <Label Grid.Row="4" Grid.Column="0" Content="Due Date" />
-        <DatePicker Grid.Row="4" Grid.Column="1" Name="dtpkDueDate" SelectedDate="{Binding Path=DueDate,Mode=TwoWay}" />
-        <Label Grid.Row="5" Grid.Column="0" Content="Responsibility (Optional)" />
-        <TextBox Grid.Row="5" Grid.Column="1" Name="txtbxResponsbility" Text="{Binding Path=Responsibility, Mode=TwoWay}" />
-        <Label Grid.Row="6" Grid.Column="0" Content="Labels" />
-        <TextBox Grid.Row="6" Grid.Column="1" Name="txtbxLabels" Text="{Binding Path=LabelsString, Mode=TwoWay}" />
+            <Label Grid.Row="0" Grid.Column="0" Content="Title" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Title, Mode=OneWay}" FontWeight="Bold" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="1" Grid.Column="0" Content="Description" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Description, Mode=OneWay}" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Category" />
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Category, Mode=OneWay}" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="3" Grid.Column="0" Content="Due Date" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Path=DueDateReadable, Mode=OneWay}" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="4" Grid.Column="0" Content="Priority" />
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Path=Priority, Mode=OneWay}" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="5" Grid.Column="0" Content="Responsibility" />
+            <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Path=Responsibility, Mode=OneWay}" Style="{StaticResource taskValue}" />
+            <Label Grid.Row="6" Grid.Column="0" Content="Labels" />
+            <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Path=LabelsString, Mode=OneWay}" Style="{StaticResource taskValue}" />
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="60*"/>
+            </Grid.ColumnDefinitions>
 
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Edit Task" HorizontalAlignment="Center" FontWeight="Bold" FontSize="18" Margin="0,30,0,30" />
+
+            <Label Grid.Row="1" Grid.Column="0" Content="Title" />
+            <TextBox Grid.Row="1" Grid.Column="1" Name="txtbxTitle" Text="{Binding Path=Title, Mode=TwoWay}" />
+            <Label Grid.Row="2" Grid.Column="0" Content="Description" />
+            <TextBox Grid.Row="2" Grid.Column="1" Name="txtbxDescription" Text="{Binding Path=Description, Mode=TwoWay}" />
+            <Label Grid.Row="3" Grid.Column="0" Content="Category" />
+            <ComboBox Grid.Row="3" Grid.Column="1" Name="cbxCategory" Text="Choose Categeory.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Category, Mode=TwoWay}" />
+            <Label Grid.Row="4" Grid.Column="0" Content="Priority" />
+            <ComboBox Grid.Row="4" Grid.Column="1" Name="cbxPriority" Text="Choose Priority.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Priority, Mode=TwoWay}" />
+            <Label Grid.Row="5" Grid.Column="0" Content="Due Date" />
+            <DatePicker Grid.Row="5" Grid.Column="1" Name="dtpkDueDate" SelectedDate="{Binding Path=DueDate,Mode=TwoWay}" />
+            <Label Grid.Row="6" Grid.Column="0" Content="Responsibility (Optional)" />
+            <TextBox Grid.Row="6" Grid.Column="1" Name="txtbxResponsbility" Text="{Binding Path=Responsibility, Mode=TwoWay}" />
+            <Label Grid.Row="7" Grid.Column="0" Content="Labels" />
+            <TextBox Grid.Row="7" Grid.Column="1" Name="txtbxLabels" Text="{Binding Path=LabelsString, Mode=TwoWay}" />
+        </Grid>
     </Grid>
 </Page>
