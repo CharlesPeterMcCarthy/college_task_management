@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,6 +46,10 @@ namespace TaskManagementApp.Models {
 
         public string DueDateReadable { get { return DueDate.ToShortDateString(); } }
         public string LabelsString { get { return string.Join(", ", Labels); } }
+
+        public object this[string propertyName] {
+            get => typeof(Task).GetProperty(propertyName).GetValue(this, null);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

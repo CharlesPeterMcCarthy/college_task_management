@@ -65,8 +65,10 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="20*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -74,7 +76,15 @@
             <Button Content="Search" Click="SearchTasks" HorizontalAlignment="Stretch" Width="200" Height="20" />
         </StackPanel>
 
-        <ListBox Name="lbxTasks" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" SelectionChanged="LbxTasks_SelectionChanged">
+        <StackPanel Grid.Row="1">
+            <CheckBox Content="Hide Completed Tasks" Click="CheckBox_Click" Name="chbxHideComplete" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <ComboBox Name="cbxSortTasks" Text="Sort By.." IsEditable="True" IsReadOnly="True" SelectionChanged="CbxSortTasks_SelectionChanged" />
+        </StackPanel>
+
+        <ListBox Name="lbxTasks" Grid.Row="3" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" SelectionChanged="LbxTasks_SelectionChanged">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Style.Triggers>
