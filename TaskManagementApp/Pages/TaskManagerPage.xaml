@@ -8,12 +8,15 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TaskManagerPage">
     <Page.Resources>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Width" Value="80" />
+            <Setter Property="Padding" Value="2" />
+            <Setter Property="Margin" Value="5,0,0,0" />
+        </Style>
+        
         <DataTemplate x:Key="TaskTemplate" x:Name="TaskTemplate" DataType="{x:Type ListBoxItem}">
             <Border Padding="4">
                 <StackPanel Name="mainPanel">
-                    <Popup Margin="10,10,0,13" Name="AssignPopup1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="120" IsOpen="False">
-                        <Button Content="Done" Click="AssignTask" />
-                    </Popup>
                     <TextBlock Text="{Binding Path=Title, Mode=OneWay}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
 
                     <Grid Name="mainGrid">
@@ -36,9 +39,9 @@
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
-                            <Button Name="btnAssign" Content="Assign" Click="AssignPopup" Width="80"/>
-                            <Button Name="btnComplete" Content="Complete" Click="CompleteTask" Width="80"/>
-                            <Button Name="btnDelete" Content="Delete" Click="DeleteTask" Width="80" />
+                            <Button Name="btnComplete" Content="Complete" Click="CompleteTask" Style="{StaticResource ButtonStyle}" />
+                            <Button Name="btnEdit" Content="Edit" Click="EditTask" Style="{StaticResource ButtonStyle}" />
+                            <Button Name="btnDelete" Content="Delete" Click="DeleteTask" Style="{StaticResource ButtonStyle}" />
                         </StackPanel>
                     </Grid>
                     
@@ -71,17 +74,17 @@
             <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="4">
             <TextBox Name="tbxSearch" HorizontalAlignment="Stretch" Width="300" Height="20"/>
-            <Button Content="Search" Click="SearchTasks" HorizontalAlignment="Stretch" Width="200" Height="20" />
+            <Button Content="Search" Click="SearchTasks" HorizontalAlignment="Stretch" Width="200" Height="20" Margin="5,0,0,0" />
         </StackPanel>
 
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Margin="4">
+            <ComboBox Name="cbxSortTasks" Text="Sort By.." IsEditable="True" IsReadOnly="True" SelectionChanged="CbxSortTasks_SelectionChanged" Width="500" />
+        </StackPanel>
+
+        <StackPanel Grid.Row="2" Margin="4">
             <CheckBox Content="Hide Completed Tasks" Click="CheckBox_Click" Name="chbxHideComplete" />
-        </StackPanel>
-
-        <StackPanel Grid.Row="2">
-            <ComboBox Name="cbxSortTasks" Text="Sort By.." IsEditable="True" IsReadOnly="True" SelectionChanged="CbxSortTasks_SelectionChanged" />
         </StackPanel>
 
         <ListBox Name="lbxTasks" Grid.Row="3" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" SelectionChanged="LbxTasks_SelectionChanged">

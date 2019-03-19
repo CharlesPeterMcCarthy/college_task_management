@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManagementApp"
         mc:Ignorable="d"
+        WindowState="Maximized"
         Title="MainWindow" Height="450" Width="800">
     <Grid x:Name="mainWindow" Loaded="MainWindow_Loaded">
         <Grid.RowDefinitions>
@@ -22,7 +23,7 @@
         </StackPanel>
 
         <StackPanel Background="Gray" Grid.Column="1" Grid.Row="0">
-            <TextBlock Name="txtBlkHeading" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Width="auto" />
+            <TextBlock Name="txtBlkHeading" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" Width="auto" Text="Task Manager" />
         </StackPanel>
         <ScrollViewer Grid.Column="1" Grid.Row="1">
             <Frame Name="mainFrame" NavigationUIVisibility="Hidden" Padding="10" />

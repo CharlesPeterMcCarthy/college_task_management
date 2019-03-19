@@ -22,49 +22,29 @@ namespace TaskManagementApp.Pages {
 
         public TaskManager TaskManager { get; set; }
         public ObservableCollection<Task> Tasks { get; set; }
-        public enum FilterType {
-            None,
-            Title,
-            Description
-        }
+
         public enum SortTypes {
             Category,
             Priority,
             DueDate,
             Labels
         }
-        private FilterType filterType = FilterType.None;
-        private object filterValue;
 
         public TaskManagerPage() => InitializeComponent();
 
         public TaskManagerPage(TaskManager tm) : this() {
             TaskManager = tm;
-            RefreshTasks();
+            RefreshTasks(TaskManager.Tasks);
 
             cbxSortTasks.ItemsSource = Enum.GetNames(typeof(SortTypes));
         }
 
-        private void RefreshTasks() {
-            Console.WriteLine(filterValue);
-            Console.WriteLine(filterType);
-            Tasks = new ObservableCollection<Task>(
-                filterType == FilterType.None ?
-                TaskManager.Tasks :
-                TaskManager.Tasks.Where(t => t[filterType.ToString()] == filterValue)
-            );
-
+        private void RefreshTasks(ObservableCollection<Task> tasks) {
+            Tasks = new ObservableCollection<Task>(tasks);
             lbxTasks.ItemsSource = Tasks;
         }
 
         private void LbxTasks_SelectionChanged(object sender, SelectionChangedEventArgs e) => NavigationService.Navigate(new ViewTaskPage(((ListBox)sender).SelectedItem as Models.Task));
-
-        private void AssignPopup(object sender, RoutedEventArgs e) {
-
-        }
-
-        private void AssignTask(object sender, RoutedEventArgs e) {
-        }
 
         private void CompleteTask(object sender, RoutedEventArgs e) {
             Task t = ((ListBoxItem)lbxTasks.ContainerFromElement((Button)sender)).Content as Models.Task;
@@ -72,20 +52,18 @@ namespace TaskManagementApp.Pages {
             TaskManager.UpdateTasks();
         }
 
+        private void EditTask(object sender, RoutedEventArgs e) => NavigationService.Navigate(new EditTaskPage(((ListBoxItem)lbxTasks.ContainerFromElement((Button)sender)).Content as Task));
+        
         private void DeleteTask(object sender, RoutedEventArgs e) {
             Task t = ((ListBoxItem)lbxTasks.ContainerFromElement((Button)sender)).Content as Models.Task;
             TaskManager.DeleteTask(t);
+            RefreshTasks(TaskManager.Tasks);
         }
 
         private void SearchTasks(object sender, RoutedEventArgs e) {
             string searchString = tbxSearch.Text;
-            FilterTasks(FilterType.Title, searchString);
-        }
-
-        private void FilterTasks(FilterType ft, object fv) {
-            filterType = ft;
-            filterValue = fv;
-            RefreshTasks();
+            Tasks.Clear();
+            foreach (Task t in TaskManager.Tasks) if (t.Title.Contains(searchString)) Tasks.Add(t);
         }
 
         private void CheckBox_Click(object sender, RoutedEventArgs e) {
@@ -97,11 +75,11 @@ namespace TaskManagementApp.Pages {
         private void CbxSortTasks_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             string field = ((ComboBox)sender).SelectedItem.ToString();
 
-            Tasks = field == "Labels" ?
+            RefreshTasks(
+                field == "Labels" ?
                 new ObservableCollection<Task>(Tasks.ToList().OrderBy(t => ((string[])t[field]).Count())) :
-                new ObservableCollection<Task>(Tasks.ToList().OrderBy(t => t[field]));
-            
-            lbxTasks.ItemsSource = Tasks;
+                new ObservableCollection<Task>(Tasks.ToList().OrderBy(t => t[field]))
+            );
         }
     }
 }

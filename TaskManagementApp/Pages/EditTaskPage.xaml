@@ -8,7 +8,36 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EditTaskPage">
 
-    <Grid>
-        
+    <Grid Background="White" x:Name="editTaskGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="60*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Content="Title" />
+        <TextBox Grid.Row="0" Grid.Column="1" Name="txtbxTitle" Text="{Binding Path=Title, Mode=TwoWay}" />
+        <Label Grid.Row="1" Grid.Column="0" Content="Description" />
+        <TextBox Grid.Row="1" Grid.Column="1" Name="txtbxDescription" Text="{Binding Path=Description, Mode=TwoWay}" />
+        <Label Grid.Row="2" Grid.Column="0" Content="Category" />
+        <ComboBox Grid.Row="2" Grid.Column="1" Name="cbxCategory" Text="Choose Catgeory.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Category, Mode=TwoWay}" />
+        <Label Grid.Row="3" Grid.Column="0" Content="Priority" />
+        <ComboBox Grid.Row="3" Grid.Column="1" Name="cbxPriority" Text="Choose Priority.." IsEditable="True" IsReadOnly="True" SelectedItem="{Binding Path=Priority, Mode=TwoWay}" />
+        <Label Grid.Row="4" Grid.Column="0" Content="Due Date" />
+        <DatePicker Grid.Row="4" Grid.Column="1" Name="dtpkDueDate" SelectedDate="{Binding Path=DueDate,Mode=TwoWay}" />
+        <Label Grid.Row="5" Grid.Column="0" Content="Responsibility (Optional)" />
+        <TextBox Grid.Row="5" Grid.Column="1" Name="txtbxResponsbility" Text="{Binding Path=Responsibility, Mode=TwoWay}" />
+        <Label Grid.Row="6" Grid.Column="0" Content="Labels" />
+        <TextBox Grid.Row="6" Grid.Column="1" Name="txtbxLabels" Text="{Binding Path=LabelsString, Mode=TwoWay}" />
+
     </Grid>
 </Page>

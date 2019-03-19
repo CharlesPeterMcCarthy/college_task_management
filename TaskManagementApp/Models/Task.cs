@@ -45,7 +45,7 @@ namespace TaskManagementApp.Models {
         }
 
         public string DueDateReadable { get { return DueDate.ToShortDateString(); } }
-        public string LabelsString { get { return string.Join(", ", Labels); } }
+        public string LabelsString { get { return string.Join(", ", Labels); } set { Labels = value.Split(','); } }
 
         public object this[string propertyName] {
             get => typeof(Task).GetProperty(propertyName).GetValue(this, null);
