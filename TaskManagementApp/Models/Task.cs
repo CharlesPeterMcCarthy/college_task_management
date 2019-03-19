@@ -28,7 +28,7 @@ namespace TaskManagementApp.Models {
         private string _responsibility;
         public string Responsibility {
             get { return _responsibility; }
-            protected set {
+            set {
                 _responsibility = value;
                 RaisePropertyChanged("Responsibility");
             }
@@ -37,7 +37,7 @@ namespace TaskManagementApp.Models {
         private bool _isComplete;
         public bool IsComplete {
             get { return _isComplete; }
-            protected set {
+            set {
                 _isComplete = value;
                 RaisePropertyChanged("IsComplete");
             }

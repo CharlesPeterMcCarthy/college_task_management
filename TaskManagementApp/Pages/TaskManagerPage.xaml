@@ -11,6 +11,9 @@
         <DataTemplate x:Key="TaskTemplate" x:Name="TaskTemplate" DataType="{x:Type ListBoxItem}">
             <Border Padding="4">
                 <StackPanel Name="mainPanel">
+                    <Popup Margin="10,10,0,13" Name="AssignPopup1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="200" Height="120" IsOpen="False">
+                        <Button Content="Done" Click="AssignTask" />
+                    </Popup>
                     <TextBlock Text="{Binding Path=Title, Mode=OneWay}" FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" />
 
                     <Grid Name="mainGrid">
@@ -33,10 +36,12 @@
                         </StackPanel>
 
                         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="4">
-                            <Button Name="btnComplete" Content="Complete" Click="CompleteTask" Width="100"/>
-                            <Button Name="btnDelete" Content="Delete" Click="DeleteTask" Width="100" />
+                            <Button Name="btnAssign" Content="Assign" Click="AssignPopup" Width="80"/>
+                            <Button Name="btnComplete" Content="Complete" Click="CompleteTask" Width="80"/>
+                            <Button Name="btnDelete" Content="Delete" Click="DeleteTask" Width="80" />
                         </StackPanel>
                     </Grid>
+                    
                 </StackPanel>
             </Border>
 
@@ -60,9 +65,14 @@
 
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBox Name="tbxSearch" HorizontalAlignment="Stretch" Width="300" Height="20"/>
+            <Button Content="Search" Click="SearchTasks" HorizontalAlignment="Stretch" Width="200" Height="20" />
+        </StackPanel>
 
         <ListBox Name="lbxTasks" Grid.Row="1" HorizontalContentAlignment="Stretch" ItemTemplate="{StaticResource TaskTemplate}" SelectionChanged="LbxTasks_SelectionChanged">
             <ListBox.ItemContainerStyle>
